@@ -1,0 +1,18 @@
+/*
+ *
+ * {{ properCase name }} reducer
+ *
+ */
+import { handleActions } from 'redux-actions';
+import { defaultAction } from './actions';
+import update from 'immutability-helper'
+
+const initialState = {};
+
+export const {{ camelCase  name}}Reducer = handleActions({
+  [defaultAction](state) {
+    return state;
+  }
+}, initialState)
+
+export default {{ camelCase name }}Reducer;
