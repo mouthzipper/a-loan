@@ -14,8 +14,22 @@ const selectOnBoardingDomain = state => state.onBoarding;
  * Default selector used by OnBoarding
  */
 
-const makeSelectOnBoarding = () =>
-  createSelector(selectOnBoardingDomain, substate => substate);
+const makeSelectBusinessInfo = () =>
+  createSelector(selectOnBoardingDomain, substate => substate.businessInfo);
+const makeSelectStep = () =>
+  createSelector(selectOnBoardingDomain, substate => substate.step);
+const makeSelectBankMetadata = () =>
+  createSelector(selectOnBoardingDomain, substate => substate.bankMetadata);
 
-export default makeSelectOnBoarding;
-export { selectOnBoardingDomain };
+const makeSelectProcessing = () =>
+  createSelector(selectOnBoardingDomain, substate => substate.processing);
+const makeSelectLoanCreated = () =>
+  createSelector(selectOnBoardingDomain, substate => substate.loanCreated);
+
+export {
+  makeSelectBusinessInfo,
+  makeSelectStep,
+  makeSelectBankMetadata,
+  makeSelectProcessing,
+  makeSelectLoanCreated,
+};

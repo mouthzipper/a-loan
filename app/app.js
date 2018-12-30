@@ -13,10 +13,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { PersistGate } from 'redux-persist/integration/react';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 // Import root app
 import App from 'containers/App';
 
@@ -33,7 +33,7 @@ import { translationMessages } from './i18n';
 
 // Create redux store with history
 const initialState = {};
-const { store, persistor } = configureStore(initialState, history);
+const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
@@ -41,11 +41,9 @@ const render = () => {
     <React.Fragment>
       <CssBaseline />
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </PersistGate>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
       </Provider>
     </React.Fragment>,
     MOUNT_NODE,

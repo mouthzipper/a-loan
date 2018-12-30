@@ -12,16 +12,12 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
 import {
   makeSelecTerm,
   makeSelectAmount,
   makeSelectPaymentInfo,
 } from './selectors';
 import { updateAmount, updatePaymentInfo, updateTerm } from './actions';
-import reducer from './reducer';
-import saga from './saga';
 import PaymentInfo from './PaymentInfo';
 import FeeInfo from './FeeInfo';
 import LoanInfo from './LoanInfo';
@@ -106,12 +102,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'homePage', reducer });
-const withSaga = injectSaga({ key: 'homePage', saga });
-
 export default compose(
-  withReducer,
-  withSaga,
   withConnect,
   withStyles(style),
 )(HomePage);

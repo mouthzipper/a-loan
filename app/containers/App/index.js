@@ -10,7 +10,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
+
+import injectSaga from 'utils/injectSaga';
+import HomePageSaga from 'containers/HomePage/saga';
 
 import HomePage from 'containers/HomePage/Loadable';
 import Admin from 'containers/Admin/Loadable';
@@ -55,4 +59,9 @@ App.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(style)(App);
+const homePageSaga = injectSaga({ key: 'homePage', saga: HomePageSaga });
+
+export default compose(
+  homePageSaga,
+  withStyles(style),
+)(App);

@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Logo from './logo.png';
 
 const style = () => ({
@@ -22,7 +23,9 @@ const style = () => ({
 function Brand({ classes }) {
   return (
     <Grid item xs={12} className={classes.root}>
-      <img src={Logo} className={classes.logo} alt="Brand Logo" />
+      <Link to="/">
+        <img src={Logo} className={classes.logo} alt="Brand Logo" />
+      </Link>
     </Grid>
   );
 }

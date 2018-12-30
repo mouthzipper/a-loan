@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Colors from 'utils/colors';
+import { Link } from 'react-router-dom';
 import LoanAmount from './LoanAmount';
 import LoanTerm from './LoanTerm';
 
@@ -42,6 +43,8 @@ function LoanInfo({ classes, amount, term, handleChange }) {
               variant="contained"
               color="primary"
               className={classes.button}
+              disabled={amount < 1}
+              component={props => <Link to="/onboarding" {...props} />}
             >
               Get a Loan
             </Button>
