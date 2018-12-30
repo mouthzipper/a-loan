@@ -2,6 +2,11 @@
 
 Project bootstrap using [react-redux-boilerplate](https://github.com/exultant-io/react-redux-boilerplate)
 
+
+Client App: [https://nifty-turing-51f442.netlify.com](https://nifty-turing-51f442.netlify.com)
+
+Admin App:[https://nifty-turing-51f442.netlify.com/admin](https://nifty-turing-51f442.netlify.com/admin)
+
 ## About
 
 Example business loan application process

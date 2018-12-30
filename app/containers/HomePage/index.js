@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
-
+import _isNan from 'lodash/isNaN';
 import {
   makeSelecTerm,
   makeSelectAmount,
@@ -31,11 +31,14 @@ const style = () => ({
 export class HomePage extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     if (
-      this.props.amount !== nextProps.amount ||
-      this.props.term !== nextProps.term
+      (this.props.amount !== nextProps.amount ||
+        this.props.term !== nextProps.term) &&
+      !_isNan(nextProps.amount)
     ) {
       const totalPaymenWithFee =
-        nextProps.amount > 0 ? nextProps.amount + nextProps.term * 10 : 0;
+        parseFloat(nextProps.amount) > 0
+          ? parseFloat(nextProps.amount) + parseInt(nextProps.term, 10) * 10
+          : 0;
       const payload = {
         weeklyPayment: (totalPaymenWithFee / nextProps.term).toFixed(2),
         totalPayment: totalPaymenWithFee.toFixed(2),
