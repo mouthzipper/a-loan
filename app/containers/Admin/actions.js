@@ -5,6 +5,16 @@
  */
 
 import { createAction } from 'redux-actions';
-import { DEFAULT_ACTION } from './constants';
+import {
+  PROCESSING,
+  GET_LOANS,
+  GET_LOANS_SUCCESS,
+  APPROVE,
+  APPROVE_SUCCESS,
+} from './constants';
 
-export const defaultAction = createAction(DEFAULT_ACTION);
+export const processing = createAction(PROCESSING);
+export const getLoans = createAction(GET_LOANS);
+export const getLoansSuccess = createAction(GET_LOANS_SUCCESS);
+export const approve = createAction(APPROVE);
+export const approveSuccess = createAction(APPROVE_SUCCESS);

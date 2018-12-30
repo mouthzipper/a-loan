@@ -14,8 +14,9 @@ const selectAdminDomain = state => state.admin;
  * Default selector used by Admin
  */
 
-const makeSelectAdmin = () =>
-  createSelector(selectAdminDomain, substate => substate);
+const makeSelectProcessing = () =>
+  createSelector(selectAdminDomain, substate => substate.processing);
 
-export default makeSelectAdmin;
-export { selectAdminDomain };
+const makeSelectLoans = () =>
+  createSelector(selectAdminDomain, substate => substate.loans);
+export { makeSelectLoans, makeSelectProcessing };

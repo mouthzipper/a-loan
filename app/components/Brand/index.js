@@ -16,7 +16,7 @@ const style = () => ({
     background: '#fff',
   },
   logo: {
-    height: 200,
+    height: 150,
   },
 });
 
