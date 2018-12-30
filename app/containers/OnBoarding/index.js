@@ -76,7 +76,7 @@ export class OnBoarding extends React.PureComponent {
       this.props.loanCreated !== nextProps.loanCreated &&
       nextProps.loanCreated
     ) {
-      this.props.history.push('/admin');
+      this.props.history.push('/dashboard');
     }
   }
 

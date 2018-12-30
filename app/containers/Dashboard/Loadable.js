@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Dashboard
+ * Asynchronously loads the component for Admin
  *
  */
 

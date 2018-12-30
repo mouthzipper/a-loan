@@ -10,3 +10,4 @@ export const GET_LOANS = 'app/Admin/GET_LOANS';
 export const GET_LOANS_SUCCESS = 'app/Admin/GET_LOANS_SUCCESS';
 export const APPROVE = 'APP/Admin/APPROVE';
 export const APPROVE_SUCCESS = 'APP/Admin/APPROVE_SUCCESS';
+export const REPAY_SUCCESS = 'APP/Admin/REPAY_SUCCESS';

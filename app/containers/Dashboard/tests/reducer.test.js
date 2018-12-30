@@ -1,7 +1,7 @@
-import dashboardReducer from '../reducer';
+import adminReducer from '../reducer';
 
-describe('dashboardReducer', () => {
+describe('adminReducer', () => {
   it('returns the initial state', () => {
-    expect(dashboardReducer(undefined, {})).toEqual({});
+    expect(adminReducer(undefined, {})).toEqual({});
   });
 });

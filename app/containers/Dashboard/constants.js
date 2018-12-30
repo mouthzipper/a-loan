@@ -4,4 +4,5 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/Dashboard/DEFAULT_ACTION';
+export const PROCESSING = 'app/Dashboard/PROCESSING';
+export const REPAY = 'APP/Dashboard/REPAY';

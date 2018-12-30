@@ -1,21 +1,20 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the dashboard state domain
+ * Direct selector to the admin state domain
  */
 
-const selectDashboardDomain = state => state.dashboard;
+const selectAdminDomain = state => state.admin;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by Dashboard
+ * Default selector used by Admin
  */
 
-const makeSelectDashboard = () =>
-  createSelector(selectDashboardDomain, substate => substate);
+const makeSelectProcessing = () =>
+  createSelector(selectAdminDomain, substate => substate.processing);
 
-export default makeSelectDashboard;
-export { selectDashboardDomain };
+export { makeSelectProcessing };

@@ -13,16 +13,12 @@ import { compose } from 'redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
 import { withStyles } from '@material-ui/core/styles';
 import LoadingOverlay from 'components/LoadingOverlay';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 import { makeSelectLoans, makeSelectProcessing } from './selectors';
 import { getLoans, approve } from './actions';
-import reducer from './reducer';
-import saga from './saga';
 import LoanItem from './LoanItem';
 
 const style = () => ({
@@ -103,12 +99,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'admin', reducer });
-const withSaga = injectSaga({ key: 'admin', saga });
-
 export default compose(
-  withReducer,
-  withSaga,
   withConnect,
   withStyles(style),
 )(Admin);

@@ -15,6 +15,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import injectSaga from 'utils/injectSaga';
 import HomePageSaga from 'containers/HomePage/saga';
+import AdminSaga from 'containers/Admin/saga';
 
 import HomePage from 'containers/HomePage/Loadable';
 import Admin from 'containers/Admin/Loadable';
@@ -60,8 +61,9 @@ App.propTypes = {
 };
 
 const homePageSaga = injectSaga({ key: 'homePage', saga: HomePageSaga });
-
+const adminSaga = injectSaga({ key: 'adman', saga: AdminSaga });
 export default compose(
   homePageSaga,
+  adminSaga,
   withStyles(style),
 )(App);

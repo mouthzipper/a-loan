@@ -1,21 +1,24 @@
 /*
  *
- * Dashboard reducer
+ * Admin reducer
  *
  */
 import { handleActions } from 'redux-actions';
-// import update from 'immutability-helper';
-import { defaultAction } from './actions';
+import update from 'immutability-helper';
+import { processing } from './actions';
 
-const initialState = {};
+const initialState = {
+  processing: false,
+  loans: {},
+};
 
-export const dashboardReducer = handleActions(
+export const adminReducer = handleActions(
   {
-    [defaultAction](state) {
-      return state;
+    [processing](state, action) {
+      return update(state, { processing: { $set: action.payload } });
     },
   },
   initialState,
 );
 
-export default dashboardReducer;
+export default adminReducer;

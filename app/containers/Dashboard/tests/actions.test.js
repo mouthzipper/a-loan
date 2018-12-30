@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import { processing } from '../actions';
+import { PROCESSING } from '../constants';
 
-describe('Dashboard actions', () => {
+describe('Admin actions', () => {
   describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+    it('has a type of PROCESSING', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: PROCESSING,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(processing()).toEqual(expected);
     });
   });
 });

@@ -11,7 +11,7 @@ import ItemLabel from 'components/ItemLabel';
 
 const styles = {
   card: {
-    height: 230,
+    height: 280,
   },
   btn: {
     color: Colors.green,
@@ -21,9 +21,9 @@ const styles = {
 };
 
 function LoanItem(props) {
-  const { classes, value, id, approve } = props;
-  const hideApproveButton =
-    _has(value, 'status') && value.status === 'Approved';
+  const { classes, value, id, repay } = props;
+  const isApprove = _has(value, 'status') && value.status === 'Approved';
+  const amountPaid = _has(value, 'amountPaid') ? value.amountPaid : 0;
   return (
     <Card className={classes.card} square>
       <CardContent>
@@ -40,20 +40,25 @@ function LoanItem(props) {
           value={value.paymentInfo.totalPayment}
           type="amount"
         />
+        <ItemLabel label="Amount Paid" value={amountPaid} type="amount" />
         <ItemLabel label="Bank" value={value.bankMetadata.institution.name} />
-        {hideApproveButton && <ItemLabel label="Status" value="Approved" />}
+        <ItemLabel label="Status" value={isApprove ? 'Approved' : 'Pending'} />
       </CardContent>
-      {!hideApproveButton && (
-        <CardActions>
-          <Button
-            size="small"
-            onClick={() => approve(id)}
-            className={classes.btn}
-          >
-            Approve
-          </Button>
-        </CardActions>
-      )}
+
+      <CardActions>
+        <Button
+          size="small"
+          onClick={() => repay(value, id)}
+          className={classes.btn}
+          disabled={
+            !isApprove ||
+            parseFloat(value.amountPaid, 10) >=
+              parseFloat(value.paymentInfo.totalPayment, 10)
+          }
+        >
+          Repay
+        </Button>
+      </CardActions>
     </Card>
   );
 }
@@ -62,7 +67,7 @@ LoanItem.propTypes = {
   classes: PropTypes.object.isRequired,
   value: PropTypes.object,
   id: PropTypes.string,
-  approve: PropTypes.func,
+  repay: PropTypes.func,
 };
 
 export default withStyles(styles)(LoanItem);

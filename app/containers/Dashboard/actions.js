@@ -1,10 +1,11 @@
 /*
  *
- * Dashboard actions
+ * Admin actions
  *
  */
 
 import { createAction } from 'redux-actions';
-import { DEFAULT_ACTION } from './constants';
+import { PROCESSING, REPAY } from './constants';
 
-export const defaultAction = createAction(DEFAULT_ACTION);
+export const processing = createAction(PROCESSING);
+export const repay = createAction(REPAY);

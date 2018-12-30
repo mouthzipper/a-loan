@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { reducer as FormReducer } from 'redux-form';
 import HomePageReducer from 'containers/HomePage/reducer';
+import AdminReducer from 'containers/Admin/reducer';
 
 import history from 'utils/history';
 /**
@@ -15,6 +16,7 @@ export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     form: FormReducer,
     homePage: HomePageReducer,
+    admin: AdminReducer,
     ...injectedReducers,
   });
 

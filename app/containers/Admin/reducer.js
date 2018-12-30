@@ -5,7 +5,13 @@
  */
 import { handleActions } from 'redux-actions';
 import update from 'immutability-helper';
-import { processing, getLoansSuccess, approveSuccess } from './actions';
+import _has from 'lodash/has';
+import {
+  processing,
+  getLoansSuccess,
+  approveSuccess,
+  repaySuccess,
+} from './actions';
 
 const initialState = {
   processing: false,
@@ -21,6 +27,20 @@ export const adminReducer = handleActions(
       return update(state, { loans: { $set: action.payload } });
     },
     [approveSuccess](state, action) {
+      return update(state, {
+        loans: { [action.payload.id]: { $merge: action.payload.data } },
+      });
+    },
+    [repaySuccess](state, action) {
+      if (_has(state.loans[action.payload.id], 'amountPaid')) {
+        return update(state, {
+          loans: {
+            [action.payload.id]: {
+              amountPaid: { $set: parseFloat(action.payload.data.amountPaid) },
+            },
+          },
+        });
+      }
       return update(state, {
         loans: { [action.payload.id]: { $merge: action.payload.data } },
       });
