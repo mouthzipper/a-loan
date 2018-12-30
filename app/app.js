@@ -16,7 +16,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 // Import root app
 import App from 'containers/App';
 
@@ -38,13 +38,16 @@ const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </PersistGate>
-    </Provider>,
+    <React.Fragment>
+      <CssBaseline />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </PersistGate>
+      </Provider>
+    </React.Fragment>,
     MOUNT_NODE,
   );
 };
