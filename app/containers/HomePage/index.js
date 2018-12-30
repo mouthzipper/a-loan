@@ -14,7 +14,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectHomePage from './selectors';
+import {
+  makeSelecTerm,
+  makeSelectAmount,
+  makeSelectPaymentInfo,
+} from './selectors';
+import { updateAmount, updatePaymentInfo, updateTerm } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import PaymentInfo from './PaymentInfo';
@@ -28,17 +33,45 @@ const style = () => ({
 });
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.amount !== nextProps.amount ||
+      this.props.term !== nextProps.term
+    ) {
+      const totalPaymenWithFee =
+        nextProps.amount > 0 ? nextProps.amount + nextProps.term * 10 : 0;
+      const payload = {
+        weeklyPayment: (totalPaymenWithFee / nextProps.term).toFixed(2),
+        totalPayment: totalPaymenWithFee.toFixed(2),
+      };
+      this.props.updatePaymentInfo(payload);
+    }
+  }
+
+  handleChange = name => event => {
+    if (name === 'amount') {
+      this.props.updateAmount(parseFloat(event.target.value, 10));
+    }
+    if (name === 'term') {
+      this.props.updateTerm(event);
+    }
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, amount, term, paymentInfo } = this.props;
     return (
       <div className={classes.root}>
         <Helmet>
           <title>HomePage</title>
           <meta name="description" content="Description of HomePage" />
         </Helmet>
-        <PaymentInfo />
+        <PaymentInfo data={paymentInfo} />
         <FeeInfo />
-        <LoanInfo />
+        <LoanInfo
+          amount={amount}
+          term={term}
+          handleChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -46,15 +79,25 @@ export class HomePage extends React.PureComponent {
 
 HomePage.propTypes = {
   classes: PropTypes.object,
+  amount: PropTypes.number,
+  term: PropTypes.number,
+  paymentInfo: PropTypes.object,
+  updateAmount: PropTypes.func,
+  updateTerm: PropTypes.func,
+  updatePaymentInfo: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  homePage: makeSelectHomePage(),
+  amount: makeSelectAmount(),
+  term: makeSelecTerm(),
+  paymentInfo: makeSelectPaymentInfo(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    updateAmount: payload => dispatch(updateAmount(payload)),
+    updateTerm: payload => dispatch(updateTerm(payload)),
+    updatePaymentInfo: payload => dispatch(updatePaymentInfo(payload)),
   };
 }
 

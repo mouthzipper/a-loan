@@ -8,11 +8,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
-// import Colors from 'utils/colors';
+import Typography from '@material-ui/core/Typography';
+import Colors from 'utils/colors';
 
 const style = () => ({
   root: {
@@ -20,19 +20,34 @@ const style = () => ({
   },
   label: {
     fontSize: 30,
+    color: Colors.grey2,
+  },
+  input: {
+    color: Colors.green,
+    fontSize: 30,
+    '&  > div > p': {
+      color: Colors.green,
+      fontSize: 30,
+    },
   },
 });
-function LoanAmount({ classes }) {
+function LoanAmount({ classes, handleChange, amount }) {
   return (
     <Grid item xs={12} sm={5}>
       <FormControl fullWidth className={classes.margin}>
-        <InputLabel htmlFor="adornment-amount" className={classes.label}>
-          Loan Amount
-        </InputLabel>
+        <Typography className={classes.label}>Loan Amount</Typography>
         <Input
           id="adornment-amount"
-          value={123}
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          value={amount}
+          type="number"
+          placeholder="0"
+          className={classes.input}
+          onChange={handleChange('amount')}
+          startAdornment={
+            <InputAdornment classes={{ input: classes.input }} position="start">
+              $
+            </InputAdornment>
+          }
         />
       </FormControl>
     </Grid>
@@ -41,6 +56,8 @@ function LoanAmount({ classes }) {
 
 LoanAmount.propTypes = {
   classes: PropTypes.object,
+  amount: PropTypes.number,
+  handleChange: PropTypes.func,
 };
 
 export default withStyles(style)(LoanAmount);

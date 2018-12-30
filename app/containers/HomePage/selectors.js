@@ -14,8 +14,12 @@ const selectHomePageDomain = state => state.homePage;
  * Default selector used by HomePage
  */
 
-const makeSelectHomePage = () =>
-  createSelector(selectHomePageDomain, substate => substate);
+const makeSelectAmount = () =>
+  createSelector(selectHomePageDomain, substate => substate.amount);
 
-export default makeSelectHomePage;
-export { selectHomePageDomain };
+const makeSelecTerm = () =>
+  createSelector(selectHomePageDomain, substate => substate.term);
+const makeSelectPaymentInfo = () =>
+  createSelector(selectHomePageDomain, substate => substate.paymentInfo);
+
+export { makeSelectAmount, makeSelecTerm, makeSelectPaymentInfo };

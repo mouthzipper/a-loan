@@ -26,15 +26,16 @@ const style = theme => ({
     color: '#fff',
     background: Colors.green,
     borderRadius: 0,
+    width: '100%',
   },
 });
-function LoanInfo({ classes }) {
+function LoanInfo({ classes, amount, term, handleChange }) {
   return (
     <Grid item xs={12}>
       <Paper className={classes.root} elevation={1} square>
-        <Grid container direction="row" alignItems="center" spacing={16}>
-          <LoanAmount />
-          <LoanTerm />
+        <Grid container direction="row" alignItems="center" spacing={24}>
+          <LoanAmount amount={amount} handleChange={handleChange} />
+          <LoanTerm term={term} handleChange={handleChange} />
           <Grid item xs={12} sm={2}>
             <Button
               flat
@@ -53,6 +54,9 @@ function LoanInfo({ classes }) {
 
 LoanInfo.propTypes = {
   classes: PropTypes.object,
+  amount: PropTypes.number,
+  term: PropTypes.number,
+  handleChange: PropTypes.func,
 };
 
 export default withStyles(style)(LoanInfo);
